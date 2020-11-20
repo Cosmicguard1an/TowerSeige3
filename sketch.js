@@ -96,7 +96,7 @@ function draw() {
   box16.display();
   box17.display();
   box18.display();
-  fill("yellow")
+  fill("red")
   ellipseMode(RADIUS)
   ellipse(this.polygon.position.x,this.polygon.position.y,20,20);
   slingshot.display();

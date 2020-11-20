@@ -5,7 +5,7 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
-
+var score
 
 var ground1,ground2
 var polygon
@@ -14,6 +14,12 @@ var box10,box11,box12,box13,box14,box15,box16,box17,box18
 
 var polygonObject
 var gameState = "onSling";
+
+var times = "images/day bacgkroudn.jpg"
+
+function preload() {
+  time();
+}
 
 function setup() {
   createCanvas(1000,800);
@@ -65,9 +71,9 @@ function setup() {
   polygon = Bodies.circle(50,200,20,options)
   World.add(world,polygon);
 
-slingshot = new SlingShot(polygon,{x: 100, y:350})
+  slingshot = new SlingShot(polygon,{x: 100, y:350})
 
-
+  score = 0;
   
 
 }
@@ -96,12 +102,36 @@ function draw() {
   box16.display();
   box17.display();
   box18.display();
+
+  box1.score();
+  box2.score();
+  box3.score();
+  box4.score();
+  box5.score();
+  box6.score();
+  box7.score();
+  box8.score();
+  box9.score();
+  box10.score();
+  box11.score();
+  box12.score();
+  box13.score();
+  box14.score();
+  box15.score();
+  box16.score();
+  box17.score();
+  box18.score();
+
+
+  
+  
   fill("red")
   ellipseMode(RADIUS)
   ellipse(this.polygon.position.x,this.polygon.position.y,20,20);
   slingshot.display();
 
- 
+  fill("green")
+  text("SCORE:" + score,750,40);
 }
 
 
@@ -117,4 +147,23 @@ function keyPressed() {
   if(keyCode === 32) {
     slingshot.attach(this.polygon);
   }
+}
+
+async function time() {
+  var response = await fetch("http://worldtimeapi.org/api/timezone/America/Los_Angeles");
+  var responseJSON = await response.json()
+
+  var hour = responseJSON.datetime.slice(11,13);
+  console.log(hour)
+
+  if(hour >= 06 && hour < 19) {
+      times = "sprites/day bacgkroudn.jpg"
+  }
+
+  else {
+      bg = "sprites/night background.jpg"
+  }
+
+  backgroundImg = loadImage(bg);
+
 }
